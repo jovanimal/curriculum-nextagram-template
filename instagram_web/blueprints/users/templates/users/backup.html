@@ -1,0 +1,14 @@
+{% extends "_layout.html" %} {% block content %}
+<div class="container" style="display: flex;">
+  <div class="col-sm-5">
+    <img
+      class="w-50 mx-auto d-block rounded-circle"
+      src="{{current_user.profile_image_url}}"
+      alt="profile placeholder"
+    />
+  </div>
+  <div class="col-sm-4" style="justify-items: flex-start">
+    <h1 class="text-center">{{current_user.username}}</h1>
+  </div>
+</div>
+{% endblock %}

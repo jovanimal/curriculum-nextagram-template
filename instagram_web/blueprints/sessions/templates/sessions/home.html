@@ -3,8 +3,8 @@ header %} {% endblock %} {% block content %} {% if current_user.is_authenticated
 %} {% for image in get_images %}
 <div class="row justify-content-center mt-sm-3">
   <div class="card mb-3 col-6" id="cards">
-    <a href="{{url_for('sessions.show', username=current_user.username)}}">
-      <h5 class="card-title mt-sm-2">{{image.username}}</h5>
+    <a href="{{url_for('users.show', username=current_user.username)}}">
+      <h5 class="card-title mt-sm-2">{{image.user.username}}</h5>
     </a>
     <img
       class="card-img-top mt-sm-2"

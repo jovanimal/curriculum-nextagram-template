@@ -1,0 +1,88 @@
+{% extends "_layout.html" %} {% block content %}
+<div class="header">
+  <div class="profile-container">
+    <div class="profile">
+      <div class="profile-image">
+        <img
+          src="{{current_user.profile_image_url}}"
+          alt="profile placeholder"
+        />
+      </div>
+
+      <div class="profile-user-settings">
+        <h1 class="profile-user-name">{{current_user.username}}</h1>
+        <a href="{{url_for('users.edit', id=current_user.id)}}">
+          <button class="btn profile-edit-btn">Update Profile</button>
+        </a>
+        <div class="profile-stats">
+          <ul>
+            <li><span class="profile-stat-count">5</span> posts</li>
+            <li><span class="profile-stat-count">1.7m</span> followers</li>
+            <li><span class="profile-stat-count">90</span> following</li>
+          </ul>
+        </div>
+
+        <div class="profile-bio">
+          <p>
+            The only way to destroy your dreams is to achieve them 📷✈️🏕️
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of profile section -->
+  <main>
+    <div class="profile-container">
+      <div class="gallery">
+        {% for image in get_images %}
+
+        <div class="gallery-item" tabindex="0">
+          <!-- <div class="card" style="width: 18rem;"> -->
+          <img
+            src="{{image.user_image_url}}"
+            class="gallery-image"
+            alt="user images"
+            sdahbnlfijlkdnflkjdsnflodshnfklsd
+          />
+          <!-- <div class="card-body">
+              <p class="card-text">{{image.caption}}</p>
+            </div> -->
+          <!-- </div> -->
+
+          <div class="gallery-item-info">
+            <ul>
+              <li class="gallery-item-likes">
+                <ion-icon name="heart-outline" class="image-icon"></ion-icon> 56
+              </li>
+              <li class="gallery-item-comments">
+                <ion-icon name="chatbubbles-outline"></ion-icon> 2
+              </li>
+              <li class="gallery-item-donations">
+                <a href="{{url_for('donations.new', image_id=image.id)}}"
+                  ><ion-icon name="cash-outline"></ion-icon
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% endfor%}
+      </div>
+    </div>
+  </main>
+  <!-- End of main section -->
+  <!-- <div class="container">
+  {% for image in get_images %}
+  <div class="card" style="width: 18rem;">
+    <img
+      class="card-img-top"
+      src="{{image.user_image_url}}"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <p class="card-text">{{image.caption}}</p>
+    </div>
+  </div>
+  {% endfor%}
+</div> -->
+  {% endblock %}
+</div>
