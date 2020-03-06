@@ -1,33 +1,47 @@
+{% from "macros/navbar.html" import navbar with context %}
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="shortcut icon" href="{{ url_for('static', filename='image/favicon.ico') }}">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <script src="https://js.braintreegateway.com/web/dropin/1.22.1/js/dropin.min.js"></script>
+    <link href="/./static/css/vendor/all.css" rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='image/favicon.ico') }}"
+    />
 
     {% assets "home_css" %}
-      <link rel="stylesheet" href="{{ ASSET_URL }}">
-    {% endassets %}
-
-    {% assets "home_js" %}
-      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-
-    {% block header %}
-    {% endblock %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %} {% assets "home_js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %} {% block header %} {% endblock %}
 
     <title>
-      {% block title %}
-      {% endblock %}NEXTAGRAM
+      {% block title %} {% endblock %}NEXTAGRAM
     </title>
-
   </head>
   <body>
-    {% block content %}
-    {% endblock %}
+    {{ navbar() }} {% with messages = get_flashed_messages(with_categories=true)
+    %} {% if messages %} {% for category, message in messages %}
+    <div class="alert alert-{{category}}" role="alert">
+      {{message}}
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+    <ion-icon class="icon-now" name="camera-outline"></ion-icon>
+    {% block content %} {% endblock %}
     <footer>
-      Made with &hearts; at <a target="_blank" href="https://www.nextacademy.com/?utm_source=github&utm_medium=student-challenge&utm_campaign=flask-nextagram">NEXT Academy</a>
+      Made with &hearts; at
+      <a
+        target="_blank"
+        href="https://www.nextacademy.com/?utm_source=github&utm_medium=student-challenge&utm_campaign=flask-nextagram"
+        >NEXT Academy</a
+      >
     </footer>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
   </body>
 </html>

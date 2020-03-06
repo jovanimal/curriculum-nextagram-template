@@ -1,0 +1,68 @@
+{% extends "_layout.html" %} {% block content %}
+<div class="container">
+  <h1 class="text-center">{{current_user.username}}'s Profile</h1>
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="m-3">
+        {% if current_user.profile_image %}
+        <img class="w-50 mx-auto d-block rounded-circle" src="{{user.profile_image_url}}" alt="profile placeholder" />
+        {% else %} <img class="w-50 mx-auto d-block rounded-circle"
+        src="{{url_for('static',filename="images/empty.jpg")}}" alt="profile
+        placeholder"> {% endif %}
+
+        <form id="image-form" enctype="multipart/form-data" method="post"
+        action="{{url_for('users.upload')}}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <input
+            class="mt-4 mx-auto"
+            type="file"
+            name="profile_image"
+            id="image_file"
+          />
+          <button
+            id="change_profile"
+            class="btn btn-primary mx-auto mt-4"
+            style="display: block"
+          ><ion-icon name="cloud-upload-outline"></ion-icon>
+            Change Profile Image
+          </button>
+        </form>
+        <button
+          id="upload_button"
+          class="btn btn-primary mx-auto mt-4"
+          style="display: none"
+        ><ion-icon name="cloud-upload-outline"></ion-icon>
+          Upload Profile Image
+        </button>
+      </div>
+      <form
+        method="post"
+        action="{{url_for('users.update', id=current_user.id)}}"
+      >
+        <div class="form-group">
+          <label for="user_name">Username</label>
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <input
+            value="{{current_user.username}}"
+            type="text"
+            name="user_name"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            value="{{current_user.email}}"
+            type="email"
+            name="email"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <button class="btn btn-outline-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

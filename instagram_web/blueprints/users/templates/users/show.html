@@ -1,0 +1,48 @@
+{% extends "_layout.html" %}
+
+{% block title %}
+{{user.name}}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+
+<!-- <h2>Your email is {{user.email}}</h2> -->
+<!-------------------- IMPLEMENT USER PAGE -->
+
+<!-- {% for image in user.userimages %}
+<img src="image.user_image" alt="uploaded user pics">
+{% endfor %} -->
+
+<!-- FOLLOWING/FOLLOWS -->
+<div class="container d-flex p-3">
+  <div>
+    <h1>{{user.username}}'s Page</h1>
+  </div>
+  {% if not current_user.is_following(user) %}
+
+  <div class="px-3">
+    <form action="{{url_for('follows.create',idol_id=user.id)}}" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <button type="submit" , class="btn btn-primary">Follow</button>
+    </form>
+  </div>
+    {% else %}
+    <button type="disabled" , class="btn btn-primary">Requested</button>
+
+    {% endif %}
+
+    <h4>Followers: {{user.fans | length}}</h2>
+      <h4>Following: {{user.idols | length}}</h2>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+
+

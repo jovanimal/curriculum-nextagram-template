@@ -1,0 +1,110 @@
+{% macro navbar() %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"
+    ><span class="title-name">Jo'stagram</span></a
+  >
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <a class="nav-link" href="{{url_for('sessions.index')}}">
+    <div class="home-icon">
+      <ion-icon name="home-outline"></ion-icon>
+      <span class="sr-only">(current)</span>
+    </div>
+  </a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if not current_user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{{url_for('sessions.new')}}"
+          >Sign In <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{url_for('users.new')}}"
+          >Sign Up <span class="sr-only">(current)</span></a
+        >
+      </li>
+      {% else %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{{url_for('sessions.show', username=current_user.username)}}">My Profile <span
+            class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{url_for('users.edit', id=current_user.id)}}"
+          >Update Profile <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('sessions.logout')}}">Logout</a>
+      </li>
+      {% endif %}
+    </ul>
+    <button
+      type="button"
+      class="btn
+      btn-primary"
+      data-toggle="modal"
+      data-target="#exampleModal1"
+    >
+      Upload Image
+    </button>
+    <div id="exampleModal1" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Choose Your Image</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{url_for('sessions.upload_images')}}" method="POST" enctype="multipart/form-data"> <label
+              for="user_file">Upload Your File</label>
+              <br></br>
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+              <div class="form-group">
+                <input type="file" name="user_image">
+                <br></br>
+                <label>Insert your caption</label>
+                <br></br>
+                <input type="text" name="caption">
+                <br></br>
+                <button type="submit">Upload</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    <form class="form-inline my-2 my-lg-0">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search user"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+  </div>
+</nav>
+{% endmacro %}
