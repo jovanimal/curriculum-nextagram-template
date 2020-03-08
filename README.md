@@ -2,6 +2,8 @@
 
 version 0.0.1 (alpha)
 
+### [View the demo](https://nextagram-flask-jovan.herokuapp.com/)
+
 ## Development
 
 **Make a fork before cloning**
